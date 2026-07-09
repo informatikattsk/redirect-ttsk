@@ -1,19 +1,12 @@
+import RedirectNotice from "./RedirectNotice";
+
 const targetUrl = "https://trnava-vuc.sk";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-8 text-center">
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.location.replace(${JSON.stringify(targetUrl)} + window.location.search + window.location.hash);`,
-        }}
-      />
-      <noscript>
-        <meta httpEquiv="refresh" content={`0; url=${targetUrl}`} />
-      </noscript>
-      <a className="underline" href={targetUrl}>
-        Pokračovať na trnava-vuc.sk
-      </a>
-    </main>
+    <RedirectNotice
+      fallbackUrl={targetUrl}
+      script={`window.location.replace(${JSON.stringify(targetUrl)} + window.location.search + window.location.hash);`}
+    />
   );
 }
