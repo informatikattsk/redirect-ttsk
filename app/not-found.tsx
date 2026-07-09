@@ -1,11 +1,17 @@
 const targetUrl = "https://trnava-vuc.sk";
 
-export default function Home() {
+export default function NotFound() {
   return (
     <main className="flex min-h-screen items-center justify-center p-8 text-center">
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.location.replace(${JSON.stringify(targetUrl)} + window.location.search + window.location.hash);`,
+          __html: `
+            const destination = new URL(${JSON.stringify(targetUrl)});
+            destination.pathname = window.location.pathname;
+            destination.search = window.location.search;
+            destination.hash = window.location.hash;
+            window.location.replace(destination.toString());
+          `,
         }}
       />
       <noscript>
